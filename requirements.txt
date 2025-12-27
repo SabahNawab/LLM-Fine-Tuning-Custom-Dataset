@@ -1,0 +1,10 @@
+huggingface_hub
+datasets
+accelerate
+peft
+trl
+bitsandbytes
+transformers @ git+https://github.com/huggingface/transformers@v4.49.0-Gemma-3
+unsloth @ git+https://github.com/unslothai/unsloth.git
+dotenv
+unsloth_zoo
