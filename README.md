@@ -49,7 +49,31 @@ pip install -r requirements.txt
 ### Training
 Ensure your dataset is present (data.jsonl)
 
-Then run
+Then run the Fine-Tuning notebook in sequence 
+
+### Export to Ollama (GGUF)
+Script creates
 ```bash
-python fine_tuning_demo.py
+actual_ai_gguf/unsloth.Q4_K_M.gguf
+```
+### Create Modelfile
+```bash
+FROM ./actual_ai_gguf/unsloth.Q4_K_M.gguf
+
+TEMPLATE """<start_of_turn>user
+{{ .Prompt }}<end_of_turn>
+<start_of_turn>model
+"""
+
+PARAMETER temperature 0.8
+PARAMETER top_p 0.9
+PARAMETER stop "<end_of_turn>"
+PARAMETER stop "<start_of_turn>"
+```
+
+### Register with Ollama
+```bash
+ollama create actual_ai -f Modelfile
+ollama run actual_ai
+
 ```
